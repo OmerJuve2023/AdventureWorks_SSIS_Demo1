@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="AllWorks_MartDemo sa"
+  DTS:DTSID="{1D8050AD-A02F-47FC-B8AE-EAD655A29464}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=OMERSOLUTIONS\SQLEXPRESS;User ID=sa;Initial Catalog=AllWorks_MartDemo;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-AdventureWorks_SSIS_Demo1-{1D8050AD-A02F-47FC-B8AE-EAD655A29464}OMERSOLUTIONS\SQLEXPRESS.AllWorks_MartDemo.sa;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAaHt6u/eJw0mTTABr240rfAAAAAACAAAAAAAQZgAAAAEAACAAAABJqBCATqUx7GkiqLaL2zoYT/MDl6xggVDrIuj0um//2gAAAAAOgAAAAAIAACAAAABdpYF0hfaTaoLuIOzv/5j7P/bS+ja4eq8/6AKyqxX1IpAAAABTrzNCeZnGFBxR/WFJyycfyWtuJwKY+nw+vi3ajN+oy6myWit4clTpqjINE8Ucnh/mZvhUCzKWmfZg3DZJscYcvNVTPEjOntpUso4ZSXPxWg2v+Q5LIPe9AIPHetuzfX/Lj0p6gyLJvjJIqLA7uk1mdfkV3yfhAa4Yd9bBatoMJkaZ+9L+LLFN+t3nmYuc3vBAAAAANb3DjWo2X4gskHHuBjoljmvykaDspZgqXAgLgK5zRwahTQyMeL5vvZu5WGg8rOQEyYjihZPMphTJLbX+vdFC8A==</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?><DTSConfiguration>
+    <DTSConfigurationHeading>
+        <DTSConfigurationFileInfo GeneratedBy="OMERSOLUTIONS\omerS" GeneratedFromPackageName="CopiaProductos" GeneratedFromPackageID="{AEE29150-F92D-4224-832E-541AC5F1B08D}" GeneratedDate="20/12/2025 14:47:15"/>
+    </DTSConfigurationHeading>
+    <Configuration ConfiguredType="Property" Path="\Package.Variables[User::varPaqueteActivo].Properties[Value]" ValueType="Boolean">
+        <ConfiguredValue>-1</ConfiguredValue>
+    </Configuration>
+</DTSConfiguration>

@@ -1,0 +1,679 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/20/2025 4:35:34 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="OMERSOLUTIONS"
+  DTS:CreatorName="OMERSOLUTIONS\omerS"
+  DTS:DTSID="{516BC997-9894-4279-B183-A2AE89811728}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="3082"
+  DTS:ObjectName="Demo Aggregarte y Sort"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{CCBD2CAB-4BA0-4712-BDC9-4D8B1BE758B2}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Despachos Detallados]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="Despachos Detallados"
+      DTS:DTSID="{842E2489-F0C4-46DE-B8AC-82D58BC695DE}"
+      DTS:ObjectName="Despachos Detallados">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="3082"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\Public\08 Recursos\08 Recursos\Laboratorio 1\DetalleDespachos.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="14"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Cantidad"
+              DTS:DTSID="{D9C298F3-4C2F-4B9C-A4E5-BCC3BFCC8AFC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdCliente"
+              DTS:DTSID="{3C215823-93B9-42A2-8A60-B43A51112BB9}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Despachos Ordenados Respuesta]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{FCCCB821-4421-4B8D-9754-0BBD0CC70A69}"
+      DTS:ObjectName="Despachos Ordenados Respuesta">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="3082"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\SQL SERVER NETO\SSIS\AdventureWorks_SSIS_Demo1\DespachosOrdenados.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="14"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Cantidad"
+              DTS:DTSID="{15C49B7B-F1BA-4176-828F-F0CF83D664F9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdCliente"
+              DTS:DTSID="{95F28074-9141-485C-BA43-4162F58503E9}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Agrupar y ordenar despachos clientes"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{AF24CF3F-EE49-4204-A220-40E5235DE121}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Agrupar y ordenar despachos clientes"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Agregado;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;3"
+              description="Agrega datos mediante funciones como Average, Sum, Count, Max y Min. Por ejemplo, se agrupan datos para calcular la suma de las ventas por producto o el promedio de visitas por día."
+              name="Agrupar Cantidades"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número aproximado de claves GROUP BY que produce la agregación. Mínimo indica 500.000 valores de clave, Medio indica 5.000.000 de valores de clave y Alto indica más de 25.000.000 de valores de clave. No especificado indica que no se usó ningún valor de KeyScale."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Especifica el número exacto de claves GROUP BY que produce la agregación. Si se especifica un valor de KeyScale, el valor de Keys tiene prioridad."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número aproximado de valores distintos de una columna que cuenta la agregación de forma distintiva. Mínimo indica 500.000 valores de clave, Medio indica 5.000.000 de valores de clave y Alto indica más de 25.000.000 valores de clave. No especificado indica que no se usa ningún valor de CountDistinctScale."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Especifica el número exacto de valores distintos de una columna que cuenta la agregación de forma distintiva. Si se especifica un valor de CountDistinctScale, el valor de CountDistinctKeys tiene prioridad."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el porcentaje en el que puede ampliarse la memoria durante la agregación. Los valores válidos están comprendidos entre 1 y 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Inputs[Entrada de agregado 1]"
+                  name="Entrada de agregado 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Inputs[Entrada de agregado 1].Columns[Cantidad]"
+                      cachedDataType="decimal"
+                      cachedName="Cantidad"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Cantidad]" />
+                    <inputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Inputs[Entrada de agregado 1].Columns[IdCliente]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="IdCliente"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[IdCliente]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Outputs[Salida de agregado 1]"
+                  name="Salida de agregado 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el número aproximado de claves GROUP BY que produce la agregación. Mínimo indica 500.000 valores de clave, Medio indica 5.000.000 de valores de clave y Alto indica más de 25.000.000 de valores de clave. No especificado indica que no se usó ningún valor de KeyScale."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Especifica el número exacto de claves GROUP BY que produce la agregación. Si se especifica un valor de KeyScale, el valor de Keys tiene prioridad."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Outputs[Salida de agregado 1].Columns[Cantidad]"
+                      dataType="decimal"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Outputs[Salida de agregado 1].Columns[Cantidad]"
+                      name="Cantidad">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el id. de la columna de entrada usada en la agregación."
+                          name="AggregationColumnId">#{Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Cantidad]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el tipo de agregación."
+                          name="AggregationType"
+                          typeConverter="AggregationType">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indica si la columna requiere tratamiento especial porque puede contener datos de tamaño excesivo o porque requiere mayor precisión que el tipo de datos float."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación de cadenas."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Outputs[Salida de agregado 1].Columns[IdCliente]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Outputs[Salida de agregado 1].Columns[IdCliente]"
+                      name="IdCliente">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el id. de la columna de entrada usada en la agregación."
+                          name="AggregationColumnId">#{Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[IdCliente]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el tipo de agregación."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indica si la columna requiere tratamiento especial porque puede contener datos de tamaño excesivo o porque requiere mayor precisión que el tipo de datos float."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación de cadenas."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Agrupar y ordenar despachos clientes\Archivo Ordenado"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Destino de archivo plano;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Destino de archivo plano"
+              localeId="3082"
+              name="Archivo Ordenado"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si los datos sobrescriben el archivo de destino o se anexan al mismo."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Especifica el texto para escribir en el archivo de destino antes de escribir ningún dato."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="Cuando el calificador de texto está habilitado, especifica si este contendrá secuencias de escape o no en los datos escritos en el archivo de destino."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Agrupar y ordenar despachos clientes\Archivo Ordenado.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Despachos Ordenados Respuesta]"
+                  connectionManagerRefId="Package.ConnectionManagers[Despachos Ordenados Respuesta]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Agrupar y ordenar despachos clientes\Archivo Ordenado.Inputs[Entrada de destino de archivo plano]"
+                  hasSideEffects="true"
+                  name="Entrada de destino de archivo plano">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Archivo Ordenado.Inputs[Entrada de destino de archivo plano].Columns[Cantidad]"
+                      cachedDataType="decimal"
+                      cachedName="Cantidad"
+                      cachedSortKeyPosition="-1"
+                      externalMetadataColumnId="Package\Agrupar y ordenar despachos clientes\Archivo Ordenado.Inputs[Entrada de destino de archivo plano].ExternalColumns[Cantidad]"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad.Outputs[Salida de ordenación].Columns[Cantidad]" />
+                    <inputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Archivo Ordenado.Inputs[Entrada de destino de archivo plano].Columns[IdCliente]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="IdCliente"
+                      externalMetadataColumnId="Package\Agrupar y ordenar despachos clientes\Archivo Ordenado.Inputs[Entrada de destino de archivo plano].ExternalColumns[IdCliente]"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad.Outputs[Salida de ordenación].Columns[IdCliente]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Archivo Ordenado.Inputs[Entrada de destino de archivo plano].ExternalColumns[IdCliente]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="IdCliente" />
+                    <externalMetadataColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Archivo Ordenado.Inputs[Entrada de destino de archivo plano].ExternalColumns[Cantidad]"
+                      dataType="decimal"
+                      name="Cantidad" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Ordenar por Cantidad"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad.Inputs[Entrada de ordenación].Columns[Cantidad]"
+                      cachedDataType="decimal"
+                      cachedName="Cantidad"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Outputs[Salida de agregado 1].Columns[Cantidad]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">-1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad.Inputs[Entrada de ordenación].Columns[IdCliente]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="IdCliente"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Outputs[Salida de agregado 1].Columns[IdCliente]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad.Outputs[Salida de ordenación].Columns[Cantidad]"
+                      dataType="decimal"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad.Outputs[Salida de ordenación].Columns[Cantidad]"
+                      name="Cantidad"
+                      sortKeyPosition="-1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Outputs[Salida de agregado 1].Columns[Cantidad]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad.Outputs[Salida de ordenación].Columns[IdCliente]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad.Outputs[Salida de ordenación].Columns[IdCliente]"
+                      name="IdCliente">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Outputs[Salida de agregado 1].Columns[IdCliente]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Origen de archivo plano;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Origen de archivo plano"
+              localeId="3082"
+              name="Origen de archivo plano"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si las columnas de longitud cero se tratan como NULL."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre de una columna de salida que contiene el nombre de archivo. Si no se especifica ningún nombre, no se genera ninguna columna de salida con el nombre de archivo."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Despachos Detallados]"
+                  connectionManagerRefId="Package.ConnectionManagers[Despachos Detallados]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano]"
+                  name="Salida de origen de archivo plano">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[IdCliente]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[IdCliente]"
+                      length="50"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[IdCliente]"
+                      name="IdCliente"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si los datos están en formato binario."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Cantidad]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[Cantidad]"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Cantidad]"
+                      name="Cantidad"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si los datos están en formato binario."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[IdCliente]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="IdCliente" />
+                    <externalMetadataColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[Cantidad]"
+                      dataType="decimal"
+                      name="Cantidad" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de archivo plano">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Columna de salida de error de origen de archivo plano"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      name="Columna de salida de error de origen de archivo plano" />
+                    <outputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Agrupar y ordenar despachos clientes.Paths[Salida de agregado 1]"
+              endId="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad.Inputs[Entrada de ordenación]"
+              name="Salida de agregado 1"
+              startId="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Outputs[Salida de agregado 1]" />
+            <path
+              refId="Package\Agrupar y ordenar despachos clientes.Paths[Salida de ordenación]"
+              endId="Package\Agrupar y ordenar despachos clientes\Archivo Ordenado.Inputs[Entrada de destino de archivo plano]"
+              name="Salida de ordenación"
+              startId="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\Agrupar y ordenar despachos clientes.Paths[Salida de origen de archivo plano]"
+              endId="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades.Inputs[Entrada de agregado 1]"
+              name="Salida de origen de archivo plano"
+              startId="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano.Outputs[Salida de origen de archivo plano]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="264,42"
+          Id="Package\Agrupar y ordenar despachos clientes"
+          TopLeft="340.5,98.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Agrupar y ordenar despachos clientes">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="196,42"
+          Id="Package\Agrupar y ordenar despachos clientes\Origen de archivo plano"
+          TopLeft="304.5,227.5" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Agrupar y ordenar despachos clientes\Agrupar Cantidades"
+          TopLeft="314.5,326.5" />
+        <EdgeLayout
+          Id="Package\Agrupar y ordenar despachos clientes.Paths[Salida de origen de archivo plano]"
+          TopLeft="402.75,269.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57"
+              Start="0,0"
+              End="0,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Agrupar y ordenar despachos clientes\Ordenar por Cantidad"
+          TopLeft="321.5,441.5" />
+        <EdgeLayout
+          Id="Package\Agrupar y ordenar despachos clientes.Paths[Salida de agregado 1]"
+          TopLeft="403,368.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11,73"
+              Start="0,0"
+              End="11,65.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.5"
+                    Point2="0,36.5"
+                    Point3="4,36.5" />
+                  <mssgle:LineSegment
+                    End="7,36.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7,36.5"
+                    Point2="11,36.5"
+                    Point3="11,40.5" />
+                  <mssgle:LineSegment
+                    End="11,65.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Agrupar y ordenar despachos clientes\Archivo Ordenado"
+          TopLeft="315.5,572.5" />
+        <EdgeLayout
+          Id="Package\Agrupar y ordenar despachos clientes.Paths[Salida de ordenación]"
+          TopLeft="414,483.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-14.5,89"
+              Start="0,0"
+              End="-14.5,81.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,40.5"
+                    Point2="0,44.5"
+                    Point3="-4,44.5" />
+                  <mssgle:LineSegment
+                    End="-10.5,44.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-10.5,44.5"
+                    Point2="-14.5,44.5"
+                    Point3="-14.5,48.5" />
+                  <mssgle:LineSegment
+                    End="-14.5,81.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
